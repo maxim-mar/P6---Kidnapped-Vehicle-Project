@@ -11,6 +11,7 @@
 
 #include "helper_functions.h"
 
+// Declare standard namespace
 using namespace std;
 
 // declare a random engine to be used across multiple and various method calls
@@ -86,12 +87,14 @@ void ParticleFilter::prediction(double delta_t, double std_pos[],
       double y;
       double theta;
       
+      // add the movement to the coordinates of the particle
       if (fabs(yaw_rate) != 0){
         x = particle_x + velocity/yaw_rate*(sin(particle_theta+yaw_rate*delta_t) - sin(particle_theta));
         y = particle_y + velocity/yaw_rate*(cos(particle_theta) - cos(particle_theta+yaw_rate*delta_t));
         theta = particle_theta + yaw_rate*delta_t;
         }
         
+        //if the yaw_rate is = 0, ignore the yaw rate => Theta is equal to the theta of the particle
         else {
             x = particle_x + velocity * delta_t * cos(particle_theta);
             y = particle_y + velocity * delta_t * sin(particle_theta);
